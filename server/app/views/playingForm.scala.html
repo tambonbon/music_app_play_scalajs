@@ -1,0 +1,37 @@
+@import views.html.helper._
+@import dao.AlbumDAO
+@import scala.concurrent.Await
+@import scala.concurrent.duration.DurationDouble
+@import scala.language.postfixOps
+@import dao.AlbumSongDAO
+@import controllers.security.BasicAuthAction
+@(ba: BasicAuthAction, playing: Form[CreatePlayingForm], as: AlbumSongDAO)(implicit requestHeader: RequestHeader, messagesProvider: MessagesProvider, request: Request[AnyContent])
+
+@*//@request.flash.get("success").map { key =>*@
+@*//    @request.messages(key)*@
+@*//}*@
+
+@main("What are you listening to?") {
+    <h1>This is a private page</h1>
+    <p>Current user: <strong>@ba.getUser(request)</strong> </p>
+    @helper.form(routes.HomeController.playing()) {
+        @select(playing("artist"), options{
+            val a = as.artistAndSong()
+            val b = Await.result(a, 0.1 seconds).keys
+            b.toList
+        })
+        @select(playing("song"), options{
+            val a = as.artistAndSong()
+            val b = Await.result(a, 0.1 seconds).values.flatten
+            b.toList
+        })
+        @CSRF.formField
+
+        <input type="submit" value="Submit">
+    }
+
+    <li><a href=@routes.HomeController.timeListened()>Your listening time per genre</a></li>
+    <li><a href=@routes.HomeController.top5Personal()>Your top 5 songs</a></li>
+
+
+}
