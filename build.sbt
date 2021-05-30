@@ -49,7 +49,7 @@ lazy val client = (project in file("client")).settings(commonSettings).settings(
     "org.querki" %%% "jquery-facade" % "2.0",
     "me.shadaj" %%% "slinky-core" % "0.6.7",
     "me.shadaj" %%% "slinky-web" % "0.6.7",
-    "com.typesafe.play" %% "play-json" % "2.8.1"
+    "com.typesafe.play" %%% "play-json" % "2.9.0"
   )
 ).enablePlugins(ScalaJSPlugin, ScalaJSWeb)
   .dependsOn(sharedJs)
@@ -64,11 +64,14 @@ lazy val shared = crossProject(JSPlatform, JVMPlatform)
       "com.typesafe.play" %% "play-json" % "2.8.1"
     )
   )
-  .jvmSettings(
-    )
-  .jsSettings(
-
-  )
+//  .jvmSettings(
+//    libraryDependencies ++= Seq(
+//      "com.typesafe.play" %%% "play-json" % "2.8.1"
+//    )
+//    )
+//  .jsSettings(
+//
+//  )
 lazy val sharedJvm = shared.jvm
 lazy val sharedJs = shared.js
 
