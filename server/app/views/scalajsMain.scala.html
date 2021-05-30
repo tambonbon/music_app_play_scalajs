@@ -1,0 +1,20 @@
+@()(implicit request: RequestHeader)
+
+@main("Music app in Scala.js") {
+    <div id="add-album">
+        <br>
+        Artist: <input type="text" id="artist">
+        <br>
+        Name: <input type="text" id="name">
+        <br>
+        Genre: <input type="text" id="genre">
+        <br>
+        <input type="submit" value="Submit">
+
+        <button onclick="add()">Submit</button><span id="submit-message"></span>
+    </div>
+
+@*    <input type="hidden" id="csrfToken" value="@helper.CSRF.getToken.value">*@
+    <input type="hidden" id="addAlbumRoute" value="@routes.HomeController.addAlbum()">
+    <input type="hidden" id="albumsRoute" value="@routes.HomeController.getAlbums()">
+}
