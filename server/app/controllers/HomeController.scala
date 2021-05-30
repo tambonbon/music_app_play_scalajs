@@ -1,14 +1,15 @@
 package controllers
 
 import java.time.LocalTime
-
 import controllers.security.BasicAuthAction
 import dao._
+
 import javax.inject._
 import models._
 import play.api.Logging
 import play.api.libs.json.{JsError, Json}
 import play.api.mvc._
+import shared.SharedMessage
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.DurationDouble
@@ -30,7 +31,7 @@ class HomeController @Inject()(cc: ControllerComponents,
   private val WithBasicAuth = new BasicAuthAction(userDAO.setOfUser())(cc)
 
   def index = Action {
-    Ok(views.html.index())
+    Ok(views.html.index(SharedMessage.itWorks))
   }
 
   /**

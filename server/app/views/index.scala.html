@@ -1,8 +1,9 @@
 @import views.html.helper._
-
+@(message: String)
 @main("Welcome to Play") {
   <h1>Welcome to Play Music App!</h1>
   <ul>
+    <li>Play shouts out: <em>@message</em></li>
     <li>Scala.js shouts out: <em id="scalaJsShoutout"></em></li>
   </ul>
   <ul>
