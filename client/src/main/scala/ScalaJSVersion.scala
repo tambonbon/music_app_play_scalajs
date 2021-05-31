@@ -10,7 +10,6 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 object ScalaJSVersion {
   val addAlbumRoute = document.getElementById("addAlbumRoute").asInstanceOf[html.Input].value
   val albumsRoute = document.getElementById("albumsRoute").asInstanceOf[html.Input].value
-  val testArtist = document.getElementById("artist").asInstanceOf[html.Input].value
   val csrfToken = document.getElementById("csrfToken").asInstanceOf[html.Input].value
 
   def init(): Unit = {

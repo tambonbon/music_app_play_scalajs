@@ -9,7 +9,6 @@ import models._
 import play.api.Logging
 import play.api.libs.json.{JsError, Json}
 import play.api.mvc._
-import shared.SharedMessage
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.DurationDouble
@@ -31,7 +30,7 @@ class HomeController @Inject()(cc: ControllerComponents,
   private val WithBasicAuth = new BasicAuthAction(userDAO.setOfUser())(cc)
 
   def index = Action {
-    Ok(views.html.index(SharedMessage.itWorks))
+    Ok(views.html.index("It works"))
   }
 
   /**
@@ -157,8 +156,8 @@ class HomeController @Inject()(cc: ControllerComponents,
     playingDAO.top5All().map(times => Ok(Json.toJson(times)))
   }
 
-  def getAlbums() = Action.async { implicit request =>
-    albumDAO.allAlbums().map (alb => Ok(Json.toJson(alb)))
+  def getAlbums() = Action { implicit request =>
+    Ok("")
   }
 
   def getSongs() = Action.async { implicit request =>
