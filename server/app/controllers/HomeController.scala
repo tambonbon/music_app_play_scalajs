@@ -30,7 +30,7 @@ class HomeController @Inject()(cc: ControllerComponents,
   private val WithBasicAuth = new BasicAuthAction(userDAO.setOfUser())(cc)
 
   def index = Action {
-    Ok(views.html.index("It works"))
+    Ok(views.html.index(shared.SharedMessage.itWorks))
   }
 
   /**
@@ -156,8 +156,8 @@ class HomeController @Inject()(cc: ControllerComponents,
     playingDAO.top5All().map(times => Ok(Json.toJson(times)))
   }
 
-  def getAlbums() = Action { implicit request =>
-    Ok("")
+  def getAlbums() = Action.async { implicit request =>
+    albumDAO.allAlbums().map(album => Ok(Json.toJson(album)))
   }
 
   def getSongs() = Action.async { implicit request =>
